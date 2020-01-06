@@ -15,8 +15,11 @@ jobs:
         with:
           channel: 'dev'
       - run: flutter config --enable-web
-      - run: flutter pub get
+      - run: pwd
+      - run: ls
       - run: cd countdown_clock
+      - run: ls
+      - run: flutter pub get
       - run: flutter build web --release
       - run: |
           cd build/web
