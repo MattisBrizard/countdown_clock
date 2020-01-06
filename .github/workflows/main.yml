@@ -15,15 +15,12 @@ jobs:
         with:
           channel: 'dev'
       - run: flutter config --enable-web
-      - run: cd countdown_clock
       - run: flutter pub get
+      - run: cd countdown_clock
       - run: flutter build web --release
       - run: |
           cd build/web
           git init
-          # type configurations: your user.email and user.name followed lines 
-          # git config --global user.email your_email 
-          # git config --global user.name your_name 
           git config --global user.email mattisbrizard@icloud.com
           git config --global user.name MattisBrizard
           git status
