@@ -110,12 +110,14 @@ class TimeCountdownState extends State<TimeCountdown> {
     final int totalUnit =
         (widget.countdownType == CountdownType.hour) ? 24 : 60;
     int timeElapsed;
+    double gapFactor;
     switch (widget.countdownType) {
       case (CountdownType.hour):
         timeElapsed = _dateTime.hour;
         break;
       case (CountdownType.minute):
         timeElapsed = _dateTime.minute;
+        gapFactor = 2;
         break;
       case (CountdownType.second):
         timeElapsed = _dateTime.second;
@@ -125,12 +127,13 @@ class TimeCountdownState extends State<TimeCountdown> {
     return Center(
       child: CircularCountdown(
         diameter: widget.diameter,
+        gapFactor: gapFactor ?? 6,
         countdownTotal: totalUnit,
         countdownRemaining: totalUnit - timeElapsed,
         countdownCurrentColor: isLightTheme ? Colors.amber : Colors.redAccent,
         strokeWidth: widget.strokeWidth,
         countdownRemainingColor: isLightTheme ? Colors.black : Colors.white,
-        countdownTotalColor: isLightTheme ? Colors.black : Colors.white12,
+        countdownTotalColor: isLightTheme ? Colors.black12 : Colors.white12,
       ),
     );
   }

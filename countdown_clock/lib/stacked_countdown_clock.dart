@@ -18,7 +18,7 @@ class CountdownClock extends StatelessWidget {
         builder: (context, constraints) {
           final double diameter = constraints.maxHeight - 10;
           final double stroke = diameter * 0.12;
-          final double gap = 10;
+          final double gap = constraints.maxHeight * 0.02;
           return Stack(
             children: <Widget>[
               TimeCountdown(
