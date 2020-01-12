@@ -11,15 +11,11 @@ enum CountdownType { hour, minute, second }
 class TimeCountdown extends StatefulWidget {
   /// Creates a [TimeCountdown].
   const TimeCountdown({
-    @required this.model,
     @required this.countdownType,
     @required this.diameter,
     @required this.strokeWidth,
     Key key,
   }) : super(key: key);
-
-  /// The clock model to use.
-  final ClockModel model;
 
   /// The type of the countdown to show.
   ///
@@ -43,32 +39,13 @@ class TimeCountdownState extends State<TimeCountdown> {
   @override
   void initState() {
     super.initState();
-    widget.model.addListener(_updateModel);
     _updateTime();
-    _updateModel();
-  }
-
-  @override
-  void didUpdateWidget(TimeCountdown oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.model != oldWidget.model) {
-      oldWidget.model.removeListener(_updateModel);
-      widget.model.addListener(_updateModel);
-    }
   }
 
   @override
   void dispose() {
     _timer?.cancel();
-    widget.model.removeListener(_updateModel);
-    widget.model.dispose();
     super.dispose();
-  }
-
-  void _updateModel() {
-    setState(() {
-      // Cause the clock to rebuild when the model changes.
-    });
   }
 
   void _updateTime() {
@@ -120,6 +97,7 @@ class TimeCountdownState extends State<TimeCountdown> {
         gapFactor = 2;
         break;
       case (CountdownType.second):
+        gapFactor = 1.2;
         timeElapsed = _dateTime.second;
         break;
       default:
@@ -130,7 +108,7 @@ class TimeCountdownState extends State<TimeCountdown> {
         gapFactor: gapFactor ?? 6,
         countdownTotal: totalUnit,
         countdownRemaining: totalUnit - timeElapsed,
-        countdownCurrentColor: isLightTheme ? Colors.amber : Colors.redAccent,
+        countdownCurrentColor: isLightTheme ? Colors.amber : Color(0xFF05827D),
         strokeWidth: widget.strokeWidth,
         countdownRemainingColor: isLightTheme ? Colors.black : Colors.white,
         countdownTotalColor: isLightTheme ? Colors.black12 : Colors.white12,
