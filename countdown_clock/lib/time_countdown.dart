@@ -1,11 +1,21 @@
 import 'dart:async';
 
-import 'package:circular_countdown/circular_countdown.dart';
+import 'package:countdown_clock/countdown.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_clock_helper/model.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 
 /// Describes the time countdown types available.
-enum CountdownType { hour, minute, second }
+enum CountdownType {
+  /// Hour unit.
+  hour,
+
+  /// Minute unit.
+  minute,
+
+  /// Second unit.
+  second,
+}
 
 /// A countdown that refreshes every `CountdownType` unit.
 class TimeCountdown extends StatefulWidget {
@@ -29,10 +39,10 @@ class TimeCountdown extends StatefulWidget {
   final double strokeWidth;
 
   @override
-  TimeCountdownState createState() => TimeCountdownState();
+  _TimeCountdownState createState() => _TimeCountdownState();
 }
 
-class TimeCountdownState extends State<TimeCountdown> {
+class _TimeCountdownState extends State<TimeCountdown> {
   DateTime _dateTime = DateTime.now();
   Timer _timer;
 
@@ -54,7 +64,7 @@ class TimeCountdownState extends State<TimeCountdown> {
       switch (widget.countdownType) {
         case CountdownType.hour:
           _timer = Timer(
-            Duration(hours: 1) -
+            const Duration(hours: 1) -
                 Duration(minutes: _dateTime.minute) -
                 Duration(seconds: _dateTime.second) -
                 Duration(milliseconds: _dateTime.millisecond),
@@ -63,7 +73,7 @@ class TimeCountdownState extends State<TimeCountdown> {
           break;
         case CountdownType.minute:
           _timer = Timer(
-            Duration(minutes: 1) -
+            const Duration(minutes: 1) -
                 Duration(seconds: _dateTime.second) -
                 Duration(milliseconds: _dateTime.millisecond),
             _updateTime,
@@ -71,7 +81,7 @@ class TimeCountdownState extends State<TimeCountdown> {
           break;
         case CountdownType.second:
           _timer = Timer(
-            Duration(seconds: 1) -
+            const Duration(seconds: 1) -
                 Duration(milliseconds: _dateTime.millisecond),
             _updateTime,
           );
@@ -89,26 +99,27 @@ class TimeCountdownState extends State<TimeCountdown> {
     int timeElapsed;
     double gapFactor;
     switch (widget.countdownType) {
-      case (CountdownType.hour):
+      case CountdownType.hour:
         timeElapsed = _dateTime.hour;
         break;
-      case (CountdownType.minute):
+      case CountdownType.minute:
         timeElapsed = _dateTime.minute;
         gapFactor = 2;
         break;
-      case (CountdownType.second):
+      case CountdownType.second:
         gapFactor = 1.2;
         timeElapsed = _dateTime.second;
         break;
       default:
     }
     return Center(
-      child: CircularCountdown(
+      child: Countdown(
         diameter: widget.diameter,
         gapFactor: gapFactor ?? 6,
         countdownTotal: totalUnit,
         countdownRemaining: totalUnit - timeElapsed,
-        countdownCurrentColor: isLightTheme ? Colors.amber : Color(0xFF05827D),
+        countdownCurrentColor:
+            isLightTheme ? Colors.amber : const Color(0xFF05827D),
         strokeWidth: widget.strokeWidth,
         countdownRemainingColor: isLightTheme ? Colors.black : Colors.white,
         countdownTotalColor: isLightTheme ? Colors.black12 : Colors.white12,
