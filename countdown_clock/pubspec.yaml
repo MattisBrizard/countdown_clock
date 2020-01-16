@@ -1,16 +1,15 @@
 name: countdown_clock
-description: A countdown clock that focus on time remaining.
+description: A countdown clock that focus on remaining time.
 version: 0.0.1+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_clock_helper:
     path: ../flutter_clock_helper
-  circular_countdown: ^0.1.0
 
 dev_dependencies:
   flutter_test:
