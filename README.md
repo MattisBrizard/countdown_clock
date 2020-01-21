@@ -1,15 +1,19 @@
-# Flutter Clock
+# Countdown clock
 
-Welcome to Flutter Clock!
+Clock face UI for FlutterClock contest - https://flutter.dev/clock.
 
-See [flutter.dev/clock](https://flutter.dev/clock) for how to get started, submission requirements, contest rules, and FAQs.
+This clock aims to focus on the remaining time of your day.
 
-See a [live demo](https://maryx.github.io/flutter_clock) with Flutter for Web!
+You can see a live demo [here](https://mattisbrizard.github.io/countdown_clock/#/) using Flutter web.
 
-Example [Analog Clock](analog_clock)
+## Dark mode
 
-<img src='analog_clock/analog.gif' width='350'>
+![Dark mode](_assets/dark.png)
 
-Example [Digital Clock](digital_clock)
+## Light mode
 
-<img src='digital_clock/digital.gif' width='350'>
+![Light mode](_assets/light.png)
+
+## [Video demo](_assets/countdown_clock.mov)
+
+![Video](_assets/countdown_clock.gif)
